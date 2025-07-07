@@ -47,6 +47,10 @@ from transformer_lens.pretrained.weight_conversions import (
 )
 
 OFFICIAL_MODEL_NAMES = [
+    "CausalNLP/tinystories-multilingual-20", 
+    "CausalNLP/tinystories-multilingual-50",
+    "CausalNLP/tinystories-multilingual-70",
+    "CausalNLP/tinystories-multilingual-90",
     "gpt2",
     "gpt2-medium",
     "gpt2-large",

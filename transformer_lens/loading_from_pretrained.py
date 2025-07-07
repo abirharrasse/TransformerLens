@@ -1107,6 +1107,22 @@ def convert_hf_model_config(model_name: str, **kwargs: Any):
             "scale_attn_by_inverse_layer_idx": False,
             "normalization_type": "LN",
         }
+    elif "CausalNLP" in official_model_name:
+        cfg_dict = {
+            "d_model": hf_config.n_embd,
+            "d_head": hf_config.n_embd // hf_config.n_head,
+            "n_heads": hf_config.n_head,
+            "d_mlp": hf_config.n_embd * 4,
+            "n_layers": hf_config.n_layer,
+            "n_ctx": hf_config.n_positions,  # Use n_positions instead of n_ctx
+            "eps": hf_config.layer_norm_epsilon,
+            "d_vocab": hf_config.vocab_size,
+            "act_fn": hf_config.activation_function,
+            "use_attn_scale": True,
+            "use_local_attn": False,
+            "scale_attn_by_inverse_layer_idx": hf_config.scale_attn_by_inverse_layer_idx,
+            "normalization_type": "LN",
+        }
     elif architecture == "GPT2LMHeadModel":
         cfg_dict = {
             "d_model": hf_config.n_embd,
